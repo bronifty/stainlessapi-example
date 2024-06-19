@@ -55,12 +55,12 @@ cd stainlessapi-example
 # With yarn
 yarn link
 cd ../my-package
-yarn link petstore
+yarn link @bronifty/petstore
 
 # With pnpm
 pnpm link --global
 cd ../my-package
-pnpm link -—global petstore
+pnpm link -—global @bronifty/petstore
 ```
 
 ## Running tests

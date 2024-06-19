@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from '../core';
-import { APIResource } from '../resource';
-import { isRequestOptions } from '../core';
-import * as UserAPI from './user';
+import * as Core from '@bronifty/petstore/core';
+import { APIResource } from '@bronifty/petstore/resource';
+import { isRequestOptions } from '@bronifty/petstore/core';
+import * as UserAPI from '@bronifty/petstore/resources/user';
 
 export class UserResource extends APIResource {
   /**

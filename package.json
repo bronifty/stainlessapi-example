@@ -1,5 +1,5 @@
 {
-  "name": "petstore",
+  "name": "@bronifty/petstore",
   "version": "0.0.1-alpha.0",
   "description": "The official TypeScript library for the Petstore API",
   "author": "Petstore <example@example.com>",
@@ -62,8 +62,8 @@
     "./shims/web.mjs"
   ],
   "imports": {
-    "petstore": ".",
-    "petstore/*": "./src/*"
+    "@bronifty/petstore": ".",
+    "@bronifty/petstore/*": "./src/*"
   },
   "exports": {
     "./_shims/auto/*": {

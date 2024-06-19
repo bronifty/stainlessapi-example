@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import Petstore from 'petstore';
-import { APIUserAbortError } from 'petstore';
-import { Headers } from 'petstore/core';
+import Petstore from '@bronifty/petstore';
+import { APIUserAbortError } from '@bronifty/petstore';
+import { Headers } from '@bronifty/petstore/core';
 import defaultFetch, { Response, type RequestInit, type RequestInfo } from 'node-fetch';
 
 describe('instantiate client', () => {
