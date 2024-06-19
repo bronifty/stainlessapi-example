@@ -5,7 +5,7 @@ import * as Errors from './error';
 import { type Agent } from './_shims/index';
 import * as Uploads from './uploads';
 import * as qs from 'qs';
-import * as API from './resources/index';
+import * as API from '@bronifty/petstore/resources/index';
 
 export interface ClientOptions {
   /**

@@ -1,6 +1,6 @@
-import { multipartFormRequestOptions, createForm } from 'petstore/core';
-import { Blob } from 'petstore/_shims/index';
-import { toFile } from 'petstore';
+import { multipartFormRequestOptions, createForm } from '@bronifty/petstore/core';
+import { Blob } from '@bronifty/petstore/_shims/index';
+import { toFile } from '@bronifty/petstore';
 
 describe('form data validation', () => {
   test('valid values do not error', async () => {

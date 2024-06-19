@@ -1,4 +1,4 @@
-import { APIClient } from 'petstore/core';
+import { APIClient } from '@bronifty/petstore/core';
 
 const { stringifyQuery } = APIClient.prototype as any;
 
