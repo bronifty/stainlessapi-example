@@ -3,14 +3,14 @@
 import Petstore from '@bronifty/petstore';
 import { Response } from 'node-fetch';
 
-const petstore = new Petstore({
+const client = new Petstore({
   apiKey: 'My API Key',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
 describe('resource order', () => {
   test('retrieve', async () => {
-    const responsePromise = petstore.store.order.retrieve(0);
+    const responsePromise = client.store.order.retrieve(0);
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -22,13 +22,13 @@ describe('resource order', () => {
 
   test('retrieve: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(petstore.store.order.retrieve(0, { path: '/_stainless_unknown_path' })).rejects.toThrow(
+    await expect(client.store.order.retrieve(0, { path: '/_stainless_unknown_path' })).rejects.toThrow(
       Petstore.NotFoundError,
     );
   });
 
   test('deleteOrder', async () => {
-    const responsePromise = petstore.store.order.deleteOrder(0);
+    const responsePromise = client.store.order.deleteOrder(0);
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -40,7 +40,7 @@ describe('resource order', () => {
 
   test('deleteOrder: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(petstore.store.order.deleteOrder(0, { path: '/_stainless_unknown_path' })).rejects.toThrow(
+    await expect(client.store.order.deleteOrder(0, { path: '/_stainless_unknown_path' })).rejects.toThrow(
       Petstore.NotFoundError,
     );
   });

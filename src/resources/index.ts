@@ -2,25 +2,25 @@
 
 export * from './shared';
 export {
-  APIResponse,
-  Pet,
-  PetFindByStatusResponse,
-  PetFindByTagsResponse,
-  PetCreateParams,
-  PetUpdateParams,
-  PetFindByStatusParams,
-  PetFindByTagsParams,
-  PetUpdateByIDParams,
-  PetUploadImageParams,
   Pets,
+  type APIResponse,
+  type Pet,
+  type PetFindByStatusResponse,
+  type PetFindByTagsResponse,
+  type PetCreateParams,
+  type PetUpdateParams,
+  type PetFindByStatusParams,
+  type PetFindByTagsParams,
+  type PetUpdateByIDParams,
+  type PetUploadImageParams,
 } from './pets';
-export { StoreInventoryResponse, StoreCreateOrderParams, Store } from './store/store';
+export { Store, type StoreInventoryResponse, type StoreCreateOrderParams } from './store/store';
 export {
-  User,
-  UserLoginResponse,
-  UserCreateParams,
-  UserUpdateParams,
-  UserCreateWithListParams,
-  UserLoginParams,
   UserResource,
+  type User,
+  type UserLoginResponse,
+  type UserCreateParams,
+  type UserUpdateParams,
+  type UserCreateWithListParams,
+  type UserLoginParams,
 } from './user';
