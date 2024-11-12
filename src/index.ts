@@ -187,29 +187,9 @@ export class Petstore extends Core.APIClient {
   static fileFromPath = Uploads.fileFromPath;
 }
 
-export {
-  PetstoreError,
-  APIError,
-  APIConnectionError,
-  APIConnectionTimeoutError,
-  APIUserAbortError,
-  NotFoundError,
-  ConflictError,
-  RateLimitError,
-  BadRequestError,
-  AuthenticationError,
-  InternalServerError,
-  PermissionDeniedError,
-  UnprocessableEntityError,
-} from './error';
-
-export import toFile = Uploads.toFile;
-export import fileFromPath = Uploads.fileFromPath;
-
 Petstore.Pets = Pets;
 Petstore.Store = Store;
 Petstore.UserResource = UserResource;
-
 export declare namespace Petstore {
   export type RequestOptions = Core.RequestOptions;
 
@@ -245,5 +225,22 @@ export declare namespace Petstore {
 
   export type Order = API.Order;
 }
+
+export { toFile, fileFromPath } from '@bronifty/petstore/uploads';
+export {
+  PetstoreError,
+  APIError,
+  APIConnectionError,
+  APIConnectionTimeoutError,
+  APIUserAbortError,
+  NotFoundError,
+  ConflictError,
+  RateLimitError,
+  BadRequestError,
+  AuthenticationError,
+  InternalServerError,
+  PermissionDeniedError,
+  UnprocessableEntityError,
+} from '@bronifty/petstore/error';
 
 export default Petstore;
