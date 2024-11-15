@@ -226,7 +226,7 @@ export declare namespace Petstore {
   export type Order = API.Order;
 }
 
-export { toFile, fileFromPath } from '@bronifty/petstore/uploads';
+export { toFile, fileFromPath } from './uploads';
 export {
   PetstoreError,
   APIError,
@@ -241,6 +241,6 @@ export {
   InternalServerError,
   PermissionDeniedError,
   UnprocessableEntityError,
-} from '@bronifty/petstore/error';
+} from './error';
 
 export default Petstore;
