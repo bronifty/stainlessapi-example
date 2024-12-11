@@ -1,10 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from '@bronifty/petstore/core';
-import { APIResource } from '@bronifty/petstore/resource';
-import { isRequestOptions } from '@bronifty/petstore/core';
-import * as PetsAPI from '@bronifty/petstore/resources/pets';
-import { type BlobLike } from '@bronifty/petstore/uploads';
+import { APIResource } from '../resource';
+import { isRequestOptions } from '../core';
+import * as Core from '../core';
+import { type BlobLike } from '../uploads';
 
 export class Pets extends APIResource {
   /**
@@ -262,15 +261,17 @@ export interface PetUploadImageParams {
   additionalMetadata?: string;
 }
 
-export namespace Pets {
-  export import APIResponse = PetsAPI.APIResponse;
-  export import Pet = PetsAPI.Pet;
-  export import PetFindByStatusResponse = PetsAPI.PetFindByStatusResponse;
-  export import PetFindByTagsResponse = PetsAPI.PetFindByTagsResponse;
-  export import PetCreateParams = PetsAPI.PetCreateParams;
-  export import PetUpdateParams = PetsAPI.PetUpdateParams;
-  export import PetFindByStatusParams = PetsAPI.PetFindByStatusParams;
-  export import PetFindByTagsParams = PetsAPI.PetFindByTagsParams;
-  export import PetUpdateByIDParams = PetsAPI.PetUpdateByIDParams;
-  export import PetUploadImageParams = PetsAPI.PetUploadImageParams;
+export declare namespace Pets {
+  export {
+    type APIResponse as APIResponse,
+    type Pet as Pet,
+    type PetFindByStatusResponse as PetFindByStatusResponse,
+    type PetFindByTagsResponse as PetFindByTagsResponse,
+    type PetCreateParams as PetCreateParams,
+    type PetUpdateParams as PetUpdateParams,
+    type PetFindByStatusParams as PetFindByStatusParams,
+    type PetFindByTagsParams as PetFindByTagsParams,
+    type PetUpdateByIDParams as PetUpdateByIDParams,
+    type PetUploadImageParams as PetUploadImageParams,
+  };
 }

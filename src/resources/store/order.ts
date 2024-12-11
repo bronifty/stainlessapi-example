@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from '@bronifty/petstore/core';
-import { APIResource } from '@bronifty/petstore/resource';
-import * as Shared from '@bronifty/petstore/resources/shared';
+import { APIResource } from '../../resource';
+import * as Core from '../../core';
+import * as Shared from '../shared';
 
 export class Order extends APIResource {
   /**

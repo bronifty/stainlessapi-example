@@ -1,11 +1,34 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { type Agent } from './_shims/index';
+import * as qs from './internal/qs';
 import * as Core from './core';
 import * as Errors from './error';
-import { type Agent } from './_shims/index';
 import * as Uploads from './uploads';
-import * as qs from 'qs';
-import * as API from '@bronifty/petstore/resources/index';
+import * as API from './resources/index';
+import {
+  APIResponse,
+  Pet,
+  PetCreateParams,
+  PetFindByStatusParams,
+  PetFindByStatusResponse,
+  PetFindByTagsParams,
+  PetFindByTagsResponse,
+  PetUpdateByIDParams,
+  PetUpdateParams,
+  PetUploadImageParams,
+  Pets,
+} from './resources/pets';
+import {
+  User,
+  UserCreateParams,
+  UserCreateWithListParams,
+  UserLoginParams,
+  UserLoginResponse,
+  UserResource,
+  UserUpdateParams,
+} from './resources/user';
+import { Store, StoreCreateOrderParams, StoreInventoryResponse } from './resources/store/store';
 
 export interface ClientOptions {
   /**
@@ -70,7 +93,9 @@ export interface ClientOptions {
   defaultQuery?: Core.DefaultQuery;
 }
 
-/** API Client for interfacing with the Petstore API. */
+/**
+ * API Client for interfacing with the Petstore API.
+ */
 export class Petstore extends Core.APIClient {
   apiKey: string;
 
@@ -112,6 +137,7 @@ export class Petstore extends Core.APIClient {
       maxRetries: options.maxRetries,
       fetch: options.fetch,
     });
+
     this._options = options;
 
     this.apiKey = apiKey;
@@ -141,6 +167,7 @@ export class Petstore extends Core.APIClient {
   }
 
   static Petstore = this;
+  static DEFAULT_TIMEOUT = 60000; // 1 minute
 
   static PetstoreError = Errors.PetstoreError;
   static APIError = Errors.APIError;
@@ -160,7 +187,47 @@ export class Petstore extends Core.APIClient {
   static fileFromPath = Uploads.fileFromPath;
 }
 
-export const {
+Petstore.Pets = Pets;
+Petstore.Store = Store;
+Petstore.UserResource = UserResource;
+export declare namespace Petstore {
+  export type RequestOptions = Core.RequestOptions;
+
+  export {
+    Pets as Pets,
+    type APIResponse as APIResponse,
+    type Pet as Pet,
+    type PetFindByStatusResponse as PetFindByStatusResponse,
+    type PetFindByTagsResponse as PetFindByTagsResponse,
+    type PetCreateParams as PetCreateParams,
+    type PetUpdateParams as PetUpdateParams,
+    type PetFindByStatusParams as PetFindByStatusParams,
+    type PetFindByTagsParams as PetFindByTagsParams,
+    type PetUpdateByIDParams as PetUpdateByIDParams,
+    type PetUploadImageParams as PetUploadImageParams,
+  };
+
+  export {
+    Store as Store,
+    type StoreInventoryResponse as StoreInventoryResponse,
+    type StoreCreateOrderParams as StoreCreateOrderParams,
+  };
+
+  export {
+    UserResource as UserResource,
+    type User as User,
+    type UserLoginResponse as UserLoginResponse,
+    type UserCreateParams as UserCreateParams,
+    type UserUpdateParams as UserUpdateParams,
+    type UserCreateWithListParams as UserCreateWithListParams,
+    type UserLoginParams as UserLoginParams,
+  };
+
+  export type Order = API.Order;
+}
+
+export { toFile, fileFromPath } from './uploads';
+export {
   PetstoreError,
   APIError,
   APIConnectionError,
@@ -174,39 +241,6 @@ export const {
   InternalServerError,
   PermissionDeniedError,
   UnprocessableEntityError,
-} = Errors;
-
-export import toFile = Uploads.toFile;
-export import fileFromPath = Uploads.fileFromPath;
-
-export namespace Petstore {
-  export import RequestOptions = Core.RequestOptions;
-
-  export import Pets = API.Pets;
-  export import APIResponse = API.APIResponse;
-  export import Pet = API.Pet;
-  export import PetFindByStatusResponse = API.PetFindByStatusResponse;
-  export import PetFindByTagsResponse = API.PetFindByTagsResponse;
-  export import PetCreateParams = API.PetCreateParams;
-  export import PetUpdateParams = API.PetUpdateParams;
-  export import PetFindByStatusParams = API.PetFindByStatusParams;
-  export import PetFindByTagsParams = API.PetFindByTagsParams;
-  export import PetUpdateByIDParams = API.PetUpdateByIDParams;
-  export import PetUploadImageParams = API.PetUploadImageParams;
-
-  export import Store = API.Store;
-  export import StoreInventoryResponse = API.StoreInventoryResponse;
-  export import StoreCreateOrderParams = API.StoreCreateOrderParams;
-
-  export import UserResource = API.UserResource;
-  export import User = API.User;
-  export import UserLoginResponse = API.UserLoginResponse;
-  export import UserCreateParams = API.UserCreateParams;
-  export import UserUpdateParams = API.UserUpdateParams;
-  export import UserCreateWithListParams = API.UserCreateWithListParams;
-  export import UserLoginParams = API.UserLoginParams;
-
-  export import Order = API.Order;
-}
+} from './error';
 
 export default Petstore;

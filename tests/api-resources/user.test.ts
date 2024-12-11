@@ -3,14 +3,14 @@
 import Petstore from '@bronifty/petstore';
 import { Response } from 'node-fetch';
 
-const petstore = new Petstore({
+const client = new Petstore({
   apiKey: 'My API Key',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
 describe('resource user', () => {
   test('create', async () => {
-    const responsePromise = petstore.user.create();
+    const responsePromise = client.user.create();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -22,7 +22,7 @@ describe('resource user', () => {
 
   test('create: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(petstore.user.create({ path: '/_stainless_unknown_path' })).rejects.toThrow(
+    await expect(client.user.create({ path: '/_stainless_unknown_path' })).rejects.toThrow(
       Petstore.NotFoundError,
     );
   });
@@ -30,7 +30,7 @@ describe('resource user', () => {
   test('create: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      petstore.user.create(
+      client.user.create(
         {
           id: 10,
           email: 'john@email.com',
@@ -47,7 +47,7 @@ describe('resource user', () => {
   });
 
   test('retrieve', async () => {
-    const responsePromise = petstore.user.retrieve('string');
+    const responsePromise = client.user.retrieve('username');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -59,13 +59,13 @@ describe('resource user', () => {
 
   test('retrieve: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(petstore.user.retrieve('string', { path: '/_stainless_unknown_path' })).rejects.toThrow(
+    await expect(client.user.retrieve('username', { path: '/_stainless_unknown_path' })).rejects.toThrow(
       Petstore.NotFoundError,
     );
   });
 
   test('update', async () => {
-    const responsePromise = petstore.user.update('string');
+    const responsePromise = client.user.update('username');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -77,7 +77,7 @@ describe('resource user', () => {
 
   test('update: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(petstore.user.update('string', { path: '/_stainless_unknown_path' })).rejects.toThrow(
+    await expect(client.user.update('username', { path: '/_stainless_unknown_path' })).rejects.toThrow(
       Petstore.NotFoundError,
     );
   });
@@ -85,8 +85,8 @@ describe('resource user', () => {
   test('update: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      petstore.user.update(
-        'string',
+      client.user.update(
+        'username',
         {
           id: 10,
           email: 'john@email.com',
@@ -103,7 +103,7 @@ describe('resource user', () => {
   });
 
   test('delete', async () => {
-    const responsePromise = petstore.user.delete('string');
+    const responsePromise = client.user.delete('username');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -115,13 +115,13 @@ describe('resource user', () => {
 
   test('delete: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(petstore.user.delete('string', { path: '/_stainless_unknown_path' })).rejects.toThrow(
+    await expect(client.user.delete('username', { path: '/_stainless_unknown_path' })).rejects.toThrow(
       Petstore.NotFoundError,
     );
   });
 
   test('createWithList: only required params', async () => {
-    const responsePromise = petstore.user.createWithList([{}, {}, {}]);
+    const responsePromise = client.user.createWithList([{}]);
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -132,42 +132,22 @@ describe('resource user', () => {
   });
 
   test('createWithList: required and optional params', async () => {
-    const response = await petstore.user.createWithList([
+    const response = await client.user.createWithList([
       {
         id: 10,
-        username: 'theUser',
+        email: 'john@email.com',
         firstName: 'John',
         lastName: 'James',
-        email: 'john@email.com',
         password: '12345',
         phone: '12345',
-        userStatus: 1,
-      },
-      {
-        id: 10,
         username: 'theUser',
-        firstName: 'John',
-        lastName: 'James',
-        email: 'john@email.com',
-        password: '12345',
-        phone: '12345',
-        userStatus: 1,
-      },
-      {
-        id: 10,
-        username: 'theUser',
-        firstName: 'John',
-        lastName: 'James',
-        email: 'john@email.com',
-        password: '12345',
-        phone: '12345',
         userStatus: 1,
       },
     ]);
   });
 
   test('login', async () => {
-    const responsePromise = petstore.user.login();
+    const responsePromise = client.user.login();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -179,7 +159,7 @@ describe('resource user', () => {
 
   test('login: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(petstore.user.login({ path: '/_stainless_unknown_path' })).rejects.toThrow(
+    await expect(client.user.login({ path: '/_stainless_unknown_path' })).rejects.toThrow(
       Petstore.NotFoundError,
     );
   });
@@ -187,12 +167,12 @@ describe('resource user', () => {
   test('login: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      petstore.user.login({ password: 'string', username: 'string' }, { path: '/_stainless_unknown_path' }),
+      client.user.login({ password: 'password', username: 'username' }, { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Petstore.NotFoundError);
   });
 
   test('logout', async () => {
-    const responsePromise = petstore.user.logout();
+    const responsePromise = client.user.logout();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -204,7 +184,7 @@ describe('resource user', () => {
 
   test('logout: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(petstore.user.logout({ path: '/_stainless_unknown_path' })).rejects.toThrow(
+    await expect(client.user.logout({ path: '/_stainless_unknown_path' })).rejects.toThrow(
       Petstore.NotFoundError,
     );
   });

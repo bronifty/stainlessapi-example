@@ -4,7 +4,7 @@
 
 This library provides convenient access to the Petstore REST API from server-side TypeScript or JavaScript.
 
-The REST API documentation can be found [on app.stainlessapi.com](https://app.stainlessapi.com/docs). The full API of this library can be found in [api.md](api.md).
+The REST API documentation can be found on [app.stainlessapi.com](https://app.stainlessapi.com/docs). The full API of this library can be found in [api.md](api.md).
 
 It is generated with [Stainless](https://www.stainlessapi.com/).
 
@@ -22,12 +22,12 @@ The full API of this library can be found in [api.md](api.md).
 ```js
 import Petstore from '@bronifty/petstore';
 
-const petstore = new Petstore({
+const client = new Petstore({
   apiKey: process.env['PETSTORE_API_KEY'], // This is the default and can be omitted
 });
 
 async function main() {
-  const order = await petstore.store.createOrder({ petId: 1, quantity: 1, status: 'placed' });
+  const order = await client.store.createOrder({ petId: 1, quantity: 1, status: 'placed' });
 
   console.log(order.id);
 }
@@ -43,12 +43,12 @@ This library includes TypeScript definitions for all request params and response
 ```ts
 import Petstore from '@bronifty/petstore';
 
-const petstore = new Petstore({
+const client = new Petstore({
   apiKey: process.env['PETSTORE_API_KEY'], // This is the default and can be omitted
 });
 
 async function main() {
-  const storeInventoryResponse: Petstore.StoreInventoryResponse = await petstore.store.inventory();
+  const response: Petstore.StoreInventoryResponse = await client.store.inventory();
 }
 
 main();
@@ -65,7 +65,7 @@ a subclass of `APIError` will be thrown:
 <!-- prettier-ignore -->
 ```ts
 async function main() {
-  const storeInventoryResponse = await petstore.store.inventory().catch(async (err) => {
+  const response = await client.store.inventory().catch(async (err) => {
     if (err instanceof Petstore.APIError) {
       console.log(err.status); // 400
       console.log(err.name); // BadRequestError
@@ -103,12 +103,12 @@ You can use the `maxRetries` option to configure or disable this:
 <!-- prettier-ignore -->
 ```js
 // Configure the default for all requests:
-const petstore = new Petstore({
+const client = new Petstore({
   maxRetries: 0, // default is 2
 });
 
 // Or, configure per-request:
-await petstore.store.inventory({
+await client.store.inventory({
   maxRetries: 5,
 });
 ```
@@ -120,12 +120,12 @@ Requests time out after 1 minute by default. You can configure this with a `time
 <!-- prettier-ignore -->
 ```ts
 // Configure the default for all requests:
-const petstore = new Petstore({
+const client = new Petstore({
   timeout: 20 * 1000, // 20 seconds (default is 1 minute)
 });
 
 // Override per-request:
-await petstore.store.inventory({
+await client.store.inventory({
   timeout: 5 * 1000,
 });
 ```
@@ -144,15 +144,15 @@ You can also use the `.withResponse()` method to get the raw `Response` along wi
 
 <!-- prettier-ignore -->
 ```ts
-const petstore = new Petstore();
+const client = new Petstore();
 
-const response = await petstore.store.inventory().asResponse();
+const response = await client.store.inventory().asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: storeInventoryResponse, response: raw } = await petstore.store.inventory().withResponse();
+const { data: response, response: raw } = await client.store.inventory().withResponse();
 console.log(raw.headers.get('X-My-Header'));
-console.log(storeInventoryResponse);
+console.log(response);
 ```
 
 ### Making custom/undocumented requests
@@ -215,7 +215,7 @@ import Petstore from '@bronifty/petstore';
 ```
 
 To do the inverse, add `import "@bronifty/petstore/shims/node"` (which does import polyfills).
-This can also be useful if you are getting the wrong TypeScript types for `Response` ([more details](https://github.com/undefined/stainlessapi-example/tree/main/src/_shims#readme)).
+This can also be useful if you are getting the wrong TypeScript types for `Response` ([more details](https://github.com/bronifty/stainlessapi-example/tree/main/src/_shims#readme)).
 
 ### Logging and middleware
 
@@ -251,12 +251,12 @@ import http from 'http';
 import { HttpsProxyAgent } from 'https-proxy-agent';
 
 // Configure the default for all requests:
-const petstore = new Petstore({
+const client = new Petstore({
   httpAgent: new HttpsProxyAgent(process.env.PROXY_URL),
 });
 
 // Override per-request:
-await petstore.store.inventory({
+await client.store.inventory({
   httpAgent: new http.Agent({ keepAlive: false }),
 });
 ```
@@ -271,7 +271,7 @@ This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) con
 
 We take backwards-compatibility seriously and work hard to ensure you can rely on a smooth upgrade experience.
 
-We are keen for your feedback; please open an [issue](https://www.github.com/undefined/stainlessapi-example/issues) with questions, bugs, or suggestions.
+We are keen for your feedback; please open an [issue](https://www.github.com/bronifty/stainlessapi-example/issues) with questions, bugs, or suggestions.
 
 ## Requirements
 
@@ -279,8 +279,9 @@ TypeScript >= 4.5 is supported.
 
 The following runtimes are supported:
 
+- Web browsers (Up-to-date Chrome, Firefox, Safari, Edge, and more)
 - Node.js 18 LTS or later ([non-EOL](https://endoflife.date/nodejs)) versions.
-- Deno v1.28.0 or higher, using `import Petstore from "npm:@bronifty/petstore"`.
+- Deno v1.28.0 or higher.
 - Bun 1.0 or later.
 - Cloudflare Workers.
 - Vercel Edge Runtime.
@@ -290,3 +291,7 @@ The following runtimes are supported:
 Note that React Native is not supported at this time.
 
 If you are interested in other runtime environments, please open or upvote an issue on GitHub.
+
+## Contributing
+
+See [the contributing documentation](./CONTRIBUTING.md).
